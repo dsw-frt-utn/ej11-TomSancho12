@@ -1,11 +1,38 @@
-﻿namespace Dsw2026Ej11.Collections;
+﻿using Dsw2026Ej11.Domain;
 
-//Crear un campo que represente una lista de alumnos (List<>)
-//Incluir un método para agregar alumnos a la lista
-//Incluir un método para retornar la lista
-//Incluir un método para buscar un alumno por nombre
-//Incluir un método para eliminar un alumno (debe recibir un alumno)
-//Incluir un método para eliminar un alumno en una determinada posición de la lista
+namespace Dsw2026Ej11.Collections;
 public class CasoList
 {
+    private List<Alumno> alumnos = new List<Alumno>();
+    public void AgregarAlumno(Alumno alumno)
+    {
+        this.alumnos.Add(alumno);
+    }
+    public List<Alumno> ObtenerAlumnos()
+    {
+        return this.alumnos;
+    }
+    public Alumno BuscarXNombre(string nombre)
+    {
+        foreach(Alumno alumno in this.alumnos)
+        {
+            if (alumno.Nombre == nombre)
+            {
+                return alumno;
+            }
+        }
+        return null;
+    }
+    public void EliminarAlumno(Alumno alumno)
+    {
+        this.alumnos.Remove(alumno);
+    }
+    public void EliminarAlumnoXPosicion(int posicion)
+    {
+        if(posicion<0 || posicion >= this.alumnos.Count)
+        {
+            throw new ArgumentOutOfRangeException("posicion", "La posicion está fuera del rango de la lista.");
+        }
+        this.alumnos.RemoveAt(posicion);
+    }
 }
